@@ -16,14 +16,6 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
         <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
         <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-        <script>
-            function confirmDelete() {
-                var answer = confirm('Sei sicuro di voler cancellare il Punto di Interesse selezionato?');
-                if(!answer){
-                    return false;
-                }
-          };
-        </script>
         <style type="text/css">
             html { height: 100% }
             body { height: 100%; margin: 0; padding: 0 }
@@ -33,12 +25,11 @@
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC350L97gjAJXR2kRsGPhKFwonwWsG3_E0&sensor=false">
         </script>
         <script type="text/javascript">
-            var geocoder;
             var map;
-            function initialize() {
-                geocoder = new google.maps.Geocoder();
+            
+            function initializeMap() {
                 var mapOptions = {
-                    center: new google.maps.LatLng(41.881831,12.505188),
+                    center: new google.maps.LatLng(<c:out value="${searchParamethers.latitudine}"/>, <c:out value="${searchParamethers.longitudine}"/>),
                     zoom: 10,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
@@ -63,8 +54,8 @@
                         {
                           infowindow.setContent('<strong><c:out value="${poi.nome}"/></strong>' + 
                               '</br>Descrizione: <c:out value="${poi.descrizione}"/> </br>' + 
-                              'Lat:<c:out value="${poi.coordinate.latitude}"/> ' + 
-                              'Lon:<c:out value="${poi.coordinate.longitude}"/></br>' + 
+                              'Latitudine:<c:out value="${poi.coordinate.latitude}"/></br>' + 
+                              'Longitudine:<c:out value="${poi.coordinate.longitude}"/></br>' + 
                               '<a href="poi/delete/<c:out value="${poi.identificativo}"/>" onclick="return confirmDelete();">Elimina</a></br>' +
                               '<a href="poi/edit/<c:out value="${poi.identificativo}"/>">Modifica</a></br>' +
                               '<a href="poi/view/<c:out value="${poi.identificativo}"/>">Dettagli</a>');
@@ -76,31 +67,51 @@
             
             function codeAddress() 
             {
-                var address = document.getElementById('address').value;
-                geocoder.geocode( { 'address': address}, function(results, status) 
+                var address = $("#indirizzo").val();
+                
+                if (address != "")
                 {
-                    if (status == google.maps.GeocoderStatus.OK) 
+                    var geocoder = new google.maps.Geocoder();
+
+                    geocoder.geocode({ 'address': address}, function(results, status)
                     {
-                        //trova latitudine e longitudine e li passa al model
-                      /*map.setCenter(results[0].geometry.location);
-                      var marker = new google.maps.Marker({
-                          map: map,
-                          position: results[0].geometry.location
-                      });*/
-                    } 
-                    else 
-                    {
-                      alert('Geocode was not successful for the following reason: ' + status);
-                    }
+                        $("#latitudine").val(results[0].geometry.location.lat());
+                        $("#longitudine").val(results[0].geometry.location.lng());
+                        map.setCenter(new google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng()), 14);
+
+                        $("#formCerca").submit();
+                    });
+
+                    $("#formCerca").unbind("submit");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            };
+            
+            function confirmDelete() {
+                var answer = confirm('Sei sicuro di voler cancellare il Punto di Interesse selezionato?');
+                if(!answer){
+                    return false;
+                }
+            };
+          
+            $(document).ready(function () { 
+                geocoder = new google.maps.Geocoder();
+
+                $("#formCerca").bind("submit",function() {
+                    return codeAddress();
                 });
-            }
+            }); 
         </script>
     </head>
-    <body onload="initialize()">
+    <body onload="initializeMap()">
         <h1>Ciao ${user.nickname}</h1>
 
         <div style="position:absolute; left:0; width:300px; height:100%">
-            <form:form action="map" commandName="searchParamethers">
+            <form:form id="formCerca" action="map" commandName="searchParamethers">
                 <fieldset>		
                     <legend>Cerca</legend>
                     <p>
@@ -110,10 +121,16 @@
                     <p>	
                         <form:label for="descrizione" path="descrizione">Descrizione</form:label><br/>
                         <form:input path="descrizione" />
+                    </p>                    
+                    <p>	
+                        <form:label for="indirizzo" path="indirizzo">Paese e/o Indirizzo</form:label><br/>
+                        <form:input id="indirizzo" path="indirizzo" />
+                        <form:hidden id="latitudine" path="latitudine" /> 
+                        <form:hidden id="longitudine" path="longitudine" /> 
                     </p>
                     <p>	
                         <input type="submit" />
-                    </p>
+                    </p
                 </fieldset>
             </form:form>
             

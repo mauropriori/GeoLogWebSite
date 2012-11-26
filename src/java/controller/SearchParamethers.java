@@ -11,7 +11,26 @@ package controller;
 public class SearchParamethers {
     private String nome;
     private String descrizione;
+    private String indirizzo;
+    private Double latitudine;
+    private Double longitudine;
 
+    public Double getLatitudine() {
+        return latitudine;
+    }
+
+    public void setLatitudine(Double latitudine) {
+        this.latitudine = latitudine;
+    }
+
+    public Double getLongitudine() {
+        return longitudine;
+    }
+
+    public void setLongitudine(Double longitudine) {
+        this.longitudine = longitudine;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -26,5 +45,13 @@ public class SearchParamethers {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+        
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
     }
 }

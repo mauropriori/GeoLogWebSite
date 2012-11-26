@@ -22,8 +22,12 @@ public class LoginController {
 
     //@ModelAttribute("user")
     @RequestMapping(method = RequestMethod.GET)
-    public String showLogin(Model model) {
-        model.addAttribute("userCredential", new UserCredential());
+    public String showLogin(Map model) {
+        Amministratore userLogged = (Amministratore) model.get("user");
+        if (userLogged != null)
+            return "redirect:/map";
+        
+        model.put("userCredential", new UserCredential());
         return "login";
     }
 

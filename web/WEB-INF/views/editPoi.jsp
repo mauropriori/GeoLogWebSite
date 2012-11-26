@@ -37,18 +37,32 @@
                 
                 var marker = new google.maps.Marker({
                     position: poiPoint,
+                    draggable:true,
                     map: map,
                     title: '<c:out value="${poi.nome}"/>'
                 });
                 
+                google.maps.event.addListener(marker, 'dragend', function() 
+                {
+                    $("#latitude").val(marker.getPosition().lat());
+                    $("#longitude").val(marker.getPosition().lng());
+                    
+                    geocodePosition(marker.getPosition());
+                });
+                
+                geocodePosition(poiPoint);
+            };
+            
+            function geocodePosition(point)
+            {
                 //Visualizzazione indirizzo
                 var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({ 'latLng': poiPoint }, function(results, status)
+                geocoder.geocode({ 'latLng': point }, function(results, status)
                 {
                     if (status == google.maps.GeocoderStatus.OK) 
-                    {
                         $("#indirizzo").text("Indirizzo: " + results[0].formatted_address);
-                    }
+                    else
+                        $("#indirizzo").text("");
                 });
             };
             
@@ -66,27 +80,34 @@
             Torna alla <a href="../../map">pagina</a> di ricerca.
         </p>
         <div style="position:absolute; left:0; width:300px; height:100%">
-                <fieldset>		
+            <form:form action="${poi.identificativo}" commandName="poi" >
+                <fieldset>
                     <legend>Dettagli</legend>
-                    <p>	
-                        Identificativo: ${poi.identificativo}
+                    <p>
+                        <form:label for="identificativo" path="identificativo">Identificativo:</form:label><br/>
+                        <form:input path="identificativo" /> <form:errors path="identificativo" />	
                     </p>
                     <p>
-                        Nome: ${poi.nome}			
+                        <form:label for="nome" path="nome">Nome:</form:label><br/>
+                        <form:input path="nome" /> <form:errors path="nome" />			
                     </p>
                     <p>	
-                        Descrizione: ${poi.descrizione}
+                        <form:label for="descrizione" path="descrizione">Descrizione:</form:label><br/>
+                        <form:input path="descrizione" /> <form:errors path="descrizione" />
                     </p>
                     <p>	
-                        Latitudine: ${poi.coordinate.latitude}
+                        <form:label for="coordinate.latitude" path="coordinate.latitude">Latitudine:</form:label><br/>
+                        <form:input id="latitude" path="coordinate.latitude" readonly="true"/> <form:errors path="coordinate.latitude" />
                     </p>
                     <p>	
-                        Longitudine: ${poi.coordinate.longitude}
+                        <form:label for="coordinate.longitude" path="coordinate.longitude">Longitudine:</form:label><br/>
+                        <form:input id="longitude" path="coordinate.longitude" readonly="true"/> <form:errors path="coordinate.longitude" />
                     </p> 
                     <p id="indirizzo" />
                     <c:if test="${poi.idTipo == '0'}">  
                         <p>	
-                        Stelle: ${poi.stelle}
+                        <form:label for="stelle" path="stelle">Stelle:</form:label><br/>
+                        <form:input path="stelle" /> <form:errors path="stelle" />
                         </p>  
                     </c:if> 
                     <c:if test="${poi.idTipo == '4'}">   
@@ -104,25 +125,32 @@
                     </c:if> 
                     <c:if test="${poi.idTipo == '6'}"> 
                         <p>	
-                        Sito Web: ${poi.webSite}
+                        <form:label for="webSite" path="webSite">Sito Web:</form:label><br/>
+                        <form:input path="webSite" /> <form:errors path="stelle" />
                         </p> 
                         <p>	
-                        Valutazione: ${poi.valutazioneGamberoRosso}
+                        <form:label for="valutazioneGamberoRosso" path="valutazioneGamberoRosso">Valutazione:</form:label><br/>
+                        <form:input path="valutazioneGamberoRosso" /> <form:errors path="valutazioneGamberoRosso" />
                         </p> 
                     </c:if> 
                     <c:if test="${poi.idTipo == '7'}"> 
                         <p>	
-                        Sito Web: ${poi.webSite}
+                        <form:label for="webSite" path="webSite">Sito Web:</form:label><br/>
+                        <form:input path="webSite" /> <form:errors path="stelle" />
                         </p> 
                     </c:if> 
                     <c:if test="${poi.idTipo == '9'}"> 
                         <p>	
-                        Tipo Trasporto: ${poi.tipoTrasporto}
+                        <form:label for="tipoTrasporto" path="tipoTrasporto">Tipo Trasporto:</form:label><br/>
+                        <form:input path="tipoTrasporto" /> <form:errors path="tipoTrasporto" />
                         </p> 
                     </c:if> 
+                    <p>	
+                        <input type="submit" />
+                    </p>
                 </fieldset>
-                    <p><a href="../delete/${poi.identificativo}" onclick="return confirmDelete();">Cancella</a></p>
-                    <p><a href="../edit/${poi.identificativo}">Modifica</a></p>
+            </form:form>
+            <p><a href="../delete/${poi.identificativo}" onclick="return confirmDelete();">Cancella</a></p>
         </div>
         <div id="map_canvas" style="position:absolute; margin-left:300px; width: 80%; height:100%"></div>
     </body>

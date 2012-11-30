@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:axis2="http://helloaxis/" xmlns:ns2="http://object.lisproject.com/xsd" xmlns:ns1="http://helloaxis/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://poi.object.lisproject.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://helloaxis/">
+    <wsdl:documentation>HelloAxisService</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax21="http://poi.object.lisproject.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://poi.object.lisproject.com/xsd">
+            <xs:complexType name="POIAlloggio">
+                <xs:complexContent>
+                    <xs:extension base="ns2:POIBase">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="existentialInfo" nillable="true" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="info" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="stelle" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ns="http://helloaxis/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://helloaxis/xsd">
+            <xs:element name="getPoiAlloggioResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ns0:POIAlloggio"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="hello">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="helloResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="pippoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="pippo2Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="pippo3Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns:ax22="http://object.lisproject.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://object.lisproject.com/xsd">
+            <xs:complexType name="ICategoria">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="idTipo" type="xs:int"/>
+                    <xs:element minOccurs="0" name="tipo" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="POIBase">
+                <xs:complexContent>
+                    <xs:extension base="ns2:ICategoria">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="coordinate" nillable="true" type="ns2:Coordinata"/>
+                            <xs:element minOccurs="0" name="dataCreazione" nillable="true" type="xs:dateTime"/>
+                            <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="existentialInfo" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="identificativo" type="xs:int"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="info" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="segnalato" type="xs:boolean"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="Coordinata">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="intLatitude" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intLongitude" type="xs:int"/>
+                    <xs:element minOccurs="0" name="latitude" type="xs:double"/>
+                    <xs:element minOccurs="0" name="longitude" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getPoiAlloggioRequest"/>
+    <wsdl:message name="getPoiAlloggioResponse">
+        <wsdl:part name="parameters" element="ns1:getPoiAlloggioResponse"/>
+    </wsdl:message>
+    <wsdl:message name="pippo2Request"/>
+    <wsdl:message name="pippo2Response">
+        <wsdl:part name="parameters" element="ns1:pippo2Response"/>
+    </wsdl:message>
+    <wsdl:message name="pippoRequest"/>
+    <wsdl:message name="pippoResponse">
+        <wsdl:part name="parameters" element="ns1:pippoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="helloRequest">
+        <wsdl:part name="parameters" element="ns1:hello"/>
+    </wsdl:message>
+    <wsdl:message name="helloResponse">
+        <wsdl:part name="parameters" element="ns1:helloResponse"/>
+    </wsdl:message>
+    <wsdl:message name="pippo3Request"/>
+    <wsdl:message name="pippo3Response">
+        <wsdl:part name="parameters" element="ns1:pippo3Response"/>
+    </wsdl:message>
+    <wsdl:portType name="HelloAxisServicePortType">
+        <wsdl:operation name="getPoiAlloggio">
+            <wsdl:input message="axis2:getPoiAlloggioRequest" wsaw:Action="urn:getPoiAlloggio"/>
+            <wsdl:output message="axis2:getPoiAlloggioResponse" wsaw:Action="urn:getPoiAlloggioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="pippo2">
+            <wsdl:input message="axis2:pippo2Request" wsaw:Action="urn:pippo2"/>
+            <wsdl:output message="axis2:pippo2Response" wsaw:Action="urn:pippo2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="pippo">
+            <wsdl:input message="axis2:pippoRequest" wsaw:Action="urn:pippo"/>
+            <wsdl:output message="axis2:pippoResponse" wsaw:Action="urn:pippoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="hello">
+            <wsdl:input message="axis2:helloRequest" wsaw:Action="urn:hello"/>
+            <wsdl:output message="axis2:helloResponse" wsaw:Action="urn:helloResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="pippo3">
+            <wsdl:input message="axis2:pippo3Request" wsaw:Action="urn:pippo3"/>
+            <wsdl:output message="axis2:pippo3Response" wsaw:Action="urn:pippo3Response"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="HelloAxisServiceSOAP11Binding" type="axis2:HelloAxisServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getPoiAlloggio">
+            <soap:operation soapAction="urn:getPoiAlloggio" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo2">
+            <soap:operation soapAction="urn:pippo2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo">
+            <soap:operation soapAction="urn:pippo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="hello">
+            <soap:operation soapAction="urn:hello" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo3">
+            <soap:operation soapAction="urn:pippo3" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="HelloAxisServiceSOAP12Binding" type="axis2:HelloAxisServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getPoiAlloggio">
+            <soap12:operation soapAction="urn:getPoiAlloggio" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo2">
+            <soap12:operation soapAction="urn:pippo2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo">
+            <soap12:operation soapAction="urn:pippo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="hello">
+            <soap12:operation soapAction="urn:hello" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo3">
+            <soap12:operation soapAction="urn:pippo3" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="HelloAxisServiceHttpBinding" type="axis2:HelloAxisServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getPoiAlloggio">
+            <http:operation location="HelloAxisService/getPoiAlloggio"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo2">
+            <http:operation location="HelloAxisService/pippo2"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo">
+            <http:operation location="HelloAxisService/pippo"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="hello">
+            <http:operation location="HelloAxisService/hello"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="pippo3">
+            <http:operation location="HelloAxisService/pippo3"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="HelloAxisService">
+        <wsdl:port name="HelloAxisServiceSOAP11port_http" binding="axis2:HelloAxisServiceSOAP11Binding">
+            <soap:address location="http://localhost:8180/axis2/services/HelloAxisService.HelloAxisServiceSOAP11port_http/"/>
+        </wsdl:port>
+        <wsdl:port name="HelloAxisServiceSOAP12port_http" binding="axis2:HelloAxisServiceSOAP12Binding">
+            <soap12:address location="http://localhost:8180/axis2/services/HelloAxisService.HelloAxisServiceSOAP12port_http/"/>
+        </wsdl:port>
+        <wsdl:port name="HelloAxisServiceHttpport" binding="axis2:HelloAxisServiceHttpBinding">
+            <http:address location="http://localhost:8180/axis2/services/HelloAxisService.HelloAxisServiceHttpport/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

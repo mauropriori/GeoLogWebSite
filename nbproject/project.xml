@@ -2,6 +2,11 @@
 <project xmlns="http://www.netbeans.org/ns/project/1">
     <type>org.netbeans.modules.web.project</type>
     <configuration>
+        <buildExtensions xmlns="http://www.netbeans.org/ns/ant-build-extender/1">
+            <extension file="jaxws-build.xml" id="jaxws">
+                <dependency dependsOn="wsimport-client-generate" target="-pre-pre-compile"/>
+            </extension>
+        </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
             <name>GeoLogWebSite</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
@@ -78,7 +83,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.geolog-dominio-package.jar}</file>
+                    <file>${file.reference.geolog_dominio_package0-2.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

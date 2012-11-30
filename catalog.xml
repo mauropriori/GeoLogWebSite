@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="https://prm.rfi.it/prodquadriqoprm/service1.asmx?wsdl" uri="src/conf/xml-resources/web-service-references/service1/wsdl/prm.rfi.it/prodquadriqoprm/service1.asmx.wsdl"/>
+    <system systemId="http://www.webservicex.net/geoipservice.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/geoipservice/wsdl/www.webservicex.net/geoipservice.asmx.wsdl"/>
+    <system systemId="http://160.80.129.114:8084/axis2/services/HelloAxisWorld?wsdl" uri="src/conf/xml-resources/web-service-references/HelloAxisWorld/wsdl/160.80.129.114_8084/axis2/services/HelloAxisWorld.wsdl"/>
+    <system systemId="http://localhost:8180/axis2/services/HelloAxisService?wsdl" uri="src/conf/xml-resources/web-service-references/HelloAxisService/wsdl/localhost_8180/axis2/services/HelloAxisService.wsdl"/>
+</catalog>
